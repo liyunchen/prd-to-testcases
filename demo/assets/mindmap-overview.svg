@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 617 477" width="617" height="477" role="img">
+<g transform="translate(18,18)">
+<rect x="0.0" y="199.0" width="326.6" height="43.0" rx="7" fill="#14110F" stroke="none" stroke-width="1"/>
+<text x="163.3" y="226.6" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#FBFAF7" text-anchor="middle">客户中心一期 测试用例（脱敏样例）</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,15.5 372.6,15.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="0.0" width="155.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="450.2" y="20.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.1 创建客户  ·  41</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,56.5 372.6,56.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="41.0" width="208.2" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="476.7" y="61.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.2 客户合作状态查询  ·  20</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,97.5 372.6,97.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="82.0" width="155.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="450.2" y="102.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.3 客户编辑  ·  22</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,138.5 372.6,138.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="123.0" width="155.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="450.2" y="143.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.4 客户跟进  ·  30</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,179.5 372.6,179.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="164.0" width="166.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="455.6" y="184.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.5.1 客户列表  ·  25</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,220.5 372.6,220.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="205.0" width="166.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="455.6" y="225.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.5.2 客户详情  ·  17</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,261.5 372.6,261.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="246.0" width="155.1" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="450.2" y="266.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.6 客户合并  ·  36</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,302.5 372.6,302.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="287.0" width="159.0" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="452.1" y="307.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">2.6.4 客户存档  ·  6</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,343.5 372.6,343.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="328.0" width="162.9" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="454.1" y="348.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">端到端业务场景  ·  9</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,384.5 372.6,384.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="369.0" width="156.7" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="451.0" y="389.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">非功能性需求  ·  13</text>
+<path d="M326.6,220.5 C347.3,220.5 351.9,425.5 372.6,425.5" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="372.6" y="410.0" width="143.4" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="444.3" y="430.2" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">待确认问题  ·  20</text>
+</g>
+</svg>

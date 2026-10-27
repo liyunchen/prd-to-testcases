@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 678 798" width="678" height="798" role="img">
+<g transform="translate(18,18)">
+<rect x="0.0" y="344.5" width="142.0" height="43.0" rx="7" fill="#14110F" stroke="none" stroke-width="1"/>
+<text x="71.0" y="372.1" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#FBFAF7" text-anchor="middle">2.1 创建客户</text>
+<path d="M142.0,366.0 C162.7,366.0 167.3,89.0 188.0,89.0" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="188.0" y="73.5" width="120.8" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="248.4" y="93.7" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">前置查重与入口</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,12.8 342.8,12.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="0.0" width="261.1" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="12.8" r="2.8" fill="#B23A2E"/>
+<text x="473.4" y="16.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-点击创建客户先弹出客户状态查询弹窗</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,43.2 342.8,43.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="30.5" width="261.1" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="43.2" r="2.8" fill="#B23A2E"/>
+<text x="473.4" y="47.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-查询未命中时展示空状态并可进入创建</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,73.8 342.8,73.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="61.0" width="298.8" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="73.8" r="2.8" fill="#B23A2E"/>
+<text x="492.2" y="77.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-查到相似客户时展示五条业务线状态与责任BD</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,104.2 342.8,104.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="91.5" width="214.2" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="104.2" r="2.8" fill="#C98A1B"/>
+<text x="449.9" y="108.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-查到相似客户后仍可继续创建</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,134.8 342.8,134.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="122.0" width="237.6" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="134.8" r="2.8" fill="#C98A1B"/>
+<text x="461.6" y="138.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-未输入客户名称时不提供创建入口</text>
+<path d="M308.8,89.0 C324.1,89.0 327.5,165.2 342.8,165.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="152.5" width="225.9" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="165.2" r="2.8" fill="#3F7A4E"/>
+<text x="455.8" y="169.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-查重后关闭弹窗不产生客户记录</text>
+<path d="M142.0,366.0 C162.7,366.0 167.3,460.0 188.0,460.0" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="188.0" y="444.5" width="107.6" height="31.0" rx="7" fill="#F7F3EA" stroke="#DCD5C6" stroke-width="1"/>
+<text x="241.8" y="464.7" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#14110F" text-anchor="middle">创建表单字段</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,200.8 342.8,200.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="188.0" width="214.2" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="200.8" r="2.8" fill="#B23A2E"/>
+<text x="449.9" y="204.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-完整填写必填项提交创建成功</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,231.2 342.8,231.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="218.5" width="216.7" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="231.2" r="2.8" fill="#3F7A4E"/>
+<text x="451.2" y="235.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-客户级别类型默认LT且不可选</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,261.8 342.8,261.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="249.0" width="225.9" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="261.8" r="2.8" fill="#C98A1B"/>
+<text x="455.8" y="265.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-客户类型默认直客并可切换代理</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,292.2 342.8,292.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="279.5" width="226.6" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="292.2" r="2.8" fill="#C98A1B"/>
+<text x="456.1" y="296.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-所属行业下拉包含全部10个枚举</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,322.8 342.8,322.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="310.0" width="237.6" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="322.8" r="2.8" fill="#C98A1B"/>
+<text x="461.6" y="326.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-国家地区默认中国并联动城市必填</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,353.2 342.8,353.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="340.5" width="214.2" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="353.2" r="2.8" fill="#B23A2E"/>
+<text x="449.9" y="357.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">边界-国家非中国时城市留空可提交</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,383.8 342.8,383.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="371.0" width="214.2" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="383.8" r="2.8" fill="#B23A2E"/>
+<text x="449.9" y="387.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-国家为中国时城市未选被拦截</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,414.2 342.8,414.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="401.5" width="200.4" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="414.2" r="2.8" fill="#C98A1B"/>
+<text x="443.0" y="418.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-客户官网非URL格式被拦截</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,444.8 342.8,444.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="432.0" width="261.1" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="444.8" r="2.8" fill="#B23A2E"/>
+<text x="473.4" y="448.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-客户来源默认市场线索并出现线索选择</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,475.2 342.8,475.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="462.5" width="272.8" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="475.2" r="2.8" fill="#B23A2E"/>
+<text x="479.2" y="479.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-来源切换为非市场线索出现中间人必填项</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,505.8 342.8,505.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="493.0" width="179.0" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="505.8" r="2.8" fill="#C98A1B"/>
+<text x="432.3" y="509.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-中间人为空提交被拦截</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,536.2 342.8,536.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="523.5" width="216.7" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="536.2" r="2.8" fill="#C98A1B"/>
+<text x="451.2" y="540.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-业务类型按BU自动带出默认值</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,566.8 342.8,566.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="554.0" width="196.9" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="566.8" r="2.8" fill="#3F7A4E"/>
+<text x="441.3" y="570.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-业务类型下拉包含6个枚举</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,597.2 342.8,597.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="584.5" width="261.1" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="597.2" r="2.8" fill="#B23A2E"/>
+<text x="473.4" y="601.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-线索已被其他客户关联时无法重复关联</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,627.8 342.8,627.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="615.0" width="249.3" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="627.8" r="2.8" fill="#B23A2E"/>
+<text x="467.5" y="631.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-普通用户只能搜索本人及下属的线索</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,658.2 342.8,658.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="645.5" width="172.1" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="658.2" r="2.8" fill="#C98A1B"/>
+<text x="428.9" y="662.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">正向-admin可搜索全量线索</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,688.8 342.8,688.8" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="676.0" width="225.9" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="688.8" r="2.8" fill="#B23A2E"/>
+<text x="455.8" y="692.9" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">反向-五个必填文本域缺失时整单拦截</text>
+<path d="M295.6,460.0 C316.8,460.0 321.6,719.2 342.8,719.2" fill="none" stroke="#D8D1C4" stroke-width="1.2"/>
+<rect x="342.8" y="706.5" width="202.4" height="25.5" rx="7" fill="#FFFFFF" stroke="#DCD5C6" stroke-width="1"/>
+<circle cx="349.8" cy="719.2" r="2.8" fill="#C98A1B"/>
+<text x="444.0" y="723.4" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="11.5" font-weight="500" fill="#2B2621" text-anchor="middle">边界-文本域超长内容可完整保存</text>
+</g>
+<text x="18" y="776" font-family="Inter, 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif" font-size="10.5" fill="#8A8074">Branch 2.1 · 前两个子功能 24 条 · 圆点颜色 = P0 / P1 / P2</text>
+</svg>

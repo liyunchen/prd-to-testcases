@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+*.xmind binary
+*.zip binary
+*.png binary
+*.svg text
+*.ps1 text eol=crlf
+*.sh text eol=lf

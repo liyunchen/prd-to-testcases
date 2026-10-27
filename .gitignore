@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 未脱敏的原始输入，绝不入库
+demo/prd/_raw.txt
+demo/output/_raw.md
+
+# 本地渲染/截图临时文件
+demo/assets/_preview_*.png
+docs/_shot_*.png
+docs/_seg*.png
+docs/_debug.html
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# WorkBuddy 工作区
+.workbuddy-ai/

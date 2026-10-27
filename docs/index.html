@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>prd-to-xmind — turn a PRD into a test-case mind map you can open</title>
+<meta name="description" content="A skill that reads a requirement document and writes a native XMind test-case mind map — 219 cases, 37 business rules, six design strategies, one command.">
+<meta property="og:title" content="prd-to-xmind — PRD → test-case mind map">
+<meta property="og:description" content="46-page PRD in, 219 test cases out, as a .xmind file you can double-click.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314110F'/%3E%3Cg stroke='%23FBFAF7' stroke-width='1.4' fill='none'%3E%3Cpath d='M10 16h5M15 16v-6h4M15 16v6h4'/%3E%3C/g%3E%3Cg fill='%23FBFAF7'%3E%3Ccircle cx='9' cy='16' r='2'/%3E%3Ccircle cx='21' cy='10' r='2'/%3E%3Ccircle cx='21' cy='22' r='2'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#FBFAF7; --card:#FFFFFF; --ink:#14110F; --ink-2:#3A342D; --ink-3:#4F463C;
+  --muted:#7A7064; --line:#E5DFD3; --line-soft:#EFEAE0;
+  --accent:#B23A2E; --amber:#C98A1B; --green:#3F7A4E;
+  --code-bg:#F4F0E7; --code-ink:#332C24;
+  --serif:Georgia,'Times New Roman','Songti SC','Noto Serif CJK SC',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+  --mono:'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace;
+  --max:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15.5px;line-height:1.75;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+a{color:inherit;text-decoration:none}
+img,svg{max-width:100%;display:block}
+code,pre{font-family:var(--mono)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;letter-spacing:.02em;font-weight:600}
+.brand .mark{width:18px;height:18px;border-radius:4px;background:var(--ink);display:grid;place-items:center}
+.brand .mark svg{width:11px;height:11px}
+.nav-links{display:flex;gap:24px;margin-left:auto;font-size:13.5px;color:var(--ink-3)}
+.nav-links a{position:relative;padding:4px 0}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-family:var(--mono);font-size:12px;border:1px solid var(--ink);border-radius:999px;padding:6px 14px;transition:.18s}
+.nav-cta:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* ---------- section chrome ---------- */
+section{padding:92px 0;border-top:1px solid var(--line-soft)}
+section:first-of-type{border-top:none}
+.label{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase;margin-bottom:26px}
+.label .num{color:var(--accent)}
+.label .rule{flex:0 0 26px;height:1px;background:var(--line);}
+h2{font-size:clamp(26px,3.1vw,34px);line-height:1.28;letter-spacing:-.012em;font-weight:600;margin:0 0 18px}
+h2 .cn{display:block;font-size:clamp(17px,1.7vw,20px);font-weight:400;color:var(--ink-3);letter-spacing:0;margin-top:10px}
+.lead{font-size:17px;line-height:1.8;color:var(--ink-3);max-width:62ch;margin:0 0 12px}
+.small{font-size:13.5px;color:var(--muted)}
+
+/* ---------- hero ---------- */
+.hero{padding:76px 0 88px}
+.hero-grid{display:grid;grid-template-columns:1fr 1.06fr;gap:52px;align-items:center}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:22px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+.eyebrow b{color:var(--ink);font-weight:600}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(36px,4.6vw,56px);line-height:1.12;letter-spacing:-.022em;
+  margin:0 0 24px;
+}
+h1 em{font-style:normal;border-bottom:2px solid var(--accent);padding-bottom:2px}
+.hero-cn{font-size:16px;line-height:1.85;color:var(--ink-3);margin:0 0 30px;max-width:46ch}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:38px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;font-size:14px;border:1px solid var(--ink);transition:.18s}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:#000;transform:translateY(-1px)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);padding-top:20px}
+.metrics div{padding-right:12px}
+.metrics b{display:block;font-family:var(--serif);font-size:29px;line-height:1.1;font-weight:400}
+.metrics span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--muted);margin-top:6px;text-transform:uppercase}
+@media(max-width:520px){.metrics{grid-template-columns:repeat(2,1fr);row-gap:18px}}
+
+.figure{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:18px 18px 12px;box-shadow:0 18px 40px -32px rgba(20,17,15,.5)}
+.figure img{width:100%;height:auto}
+.figure figcaption{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.03em;margin-top:10px;padding-top:10px;border-top:1px solid var(--line-soft);display:flex;justify-content:space-between;gap:10px}
+
+/* ---------- gap cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+@media(max-width:880px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px 24px;transition:.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 16px 32px -28px rgba(20,17,15,.55)}
+.card .idx{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.1em}
+.card h3{font-size:16.5px;margin:12px 0 8px;font-weight:600}
+.card p{margin:0;font-size:14px;line-height:1.75;color:var(--ink-3)}
+
+/* ---------- workflow ---------- */
+.steps{margin-top:44px;border-top:1px solid var(--line)}
+.step{display:grid;grid-template-columns:56px 1.05fr 1fr;gap:26px;padding:26px 0;border-bottom:1px solid var(--line-soft);align-items:start}
+@media(max-width:880px){.step{grid-template-columns:40px 1fr;gap:16px}.step .snip{grid-column:2}}
+.step .no{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:4px}
+.step h3{margin:0 0 6px;font-size:16.5px;font-weight:600;letter-spacing:-.01em}
+.step h3 span{font-weight:400;color:var(--muted);font-size:13px;margin-left:8px;font-family:var(--mono)}
+.step p{margin:0;font-size:14px;color:var(--ink-3);line-height:1.75}
+.snip{background:var(--code-bg);border:1px solid var(--line-soft);border-radius:8px;padding:12px 14px;font-size:11.5px;line-height:1.7;color:var(--code-ink);overflow-x:auto;white-space:pre;margin:0}
+.snip .c{color:#8A8074}
+.snip .ok{color:var(--green)}
+
+/* ---------- demo ---------- */
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:38px;align-items:stretch}
+@media(max-width:880px){.demo-grid{grid-template-columns:1fr}.panel{height:auto}.panel-body{max-height:420px}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:600px}
+.panel-head{display:flex;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line-soft);background:#FCFBF8;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em}
+.panel-head .file{color:var(--ink-2)}
+.panel-head .tag{margin-left:auto;font-size:10px;border:1px solid var(--line);border-radius:999px;padding:2px 8px;color:var(--muted)}
+.panel-body{padding:16px 18px;overflow:auto;flex:1;font-size:13px;line-height:1.7}
+.panel-body.prd{font-size:12.5px}
+.panel-body.prd h4{margin:14px 0 6px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.panel-body.prd h4:first-child{margin-top:0}
+.panel-body table{border-collapse:collapse;width:100%;font-size:11.5px;margin:6px 0 10px}
+.panel-body th,.panel-body td{border-bottom:1px solid var(--line-soft);padding:5px 8px 5px 0;text-align:left;vertical-align:top}
+.panel-body th{font-weight:600;color:var(--ink-3);white-space:nowrap}
+.panel-body td:first-child{white-space:nowrap;color:var(--ink-2)}
+.panel-body .br{font-family:var(--mono);font-size:11px;color:var(--accent);margin-right:6px}
+.term{background:#17140F;color:#E9E2D5;border-radius:12px;border:1px solid #241F18}
+.term .panel-head{background:#1D1913;border-bottom:1px solid #2A241C;color:#8F8577}
+.term .panel-head .file{color:#E9E2D5}
+.term pre{margin:0;padding:16px 18px;font-size:11.5px;line-height:1.85;color:#CFC6B6;overflow:auto;white-space:pre;flex:1}
+.term .ok{color:#7FB58C}
+.term .hi{color:#E8A33D}
+
+.map-panel{margin-top:20px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.map-body{display:grid;grid-template-columns:1fr 268px;min-width:0}
+@media(max-width:900px){.map-body{grid-template-columns:1fr}.map-scroll img{width:100%;max-width:100%}}
+.map-scroll{max-height:560px;overflow:auto;padding:22px;min-width:0;background:
+  radial-gradient(circle at 1px 1px,rgba(20,17,15,.055) 1px,transparent 0) 0 0/22px 22px,#FDFCF9}
+.map-scroll img{width:auto;max-width:none;height:auto;display:block;margin:0 auto}
+.map-side{border-left:1px solid var(--line-soft);padding:22px 20px;display:flex;flex-direction:column;gap:18px;background:#FCFBF8}
+@media(max-width:900px){.map-side{border-left:none;border-top:1px solid var(--line-soft)}}
+.map-side .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+.map-side .big{font-family:var(--serif);font-size:32px;line-height:1;font-weight:400}
+.map-side .big span{font-family:var(--sans);font-size:12px;color:var(--muted);margin-left:6px}
+.bars{display:grid;gap:7px;margin-top:2px}
+.bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3)}
+.bar i{width:8px;height:8px;border-radius:2px;flex:none}
+.bar .n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.map-side p{margin:0;font-size:12px;line-height:1.7;color:var(--muted)}
+.map-foot{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:10px 16px;border-top:1px solid var(--line-soft);font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.map-foot .dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:-1px}
+
+/* ---------- tree ---------- */
+.tree-tools{display:flex;align-items:center;gap:10px;margin:34px 0 14px}
+.tree-tools .sp{margin-left:auto}
+.mini{font-family:var(--mono);font-size:11px;border:1px solid var(--line);background:var(--card);border-radius:6px;padding:5px 10px;cursor:pointer;color:var(--ink-3)}
+.mini:hover{border-color:var(--ink);color:var(--ink)}
+.tree{border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+details.mod{border-bottom:1px solid var(--line)}
+details.mod:last-child{border-bottom:none}
+details.mod>summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;background:#FCFBF8}
+details.mod>summary::-webkit-details-marker{display:none}
+details.mod>summary .caret{width:14px;color:var(--muted);transition:transform .18s;font-family:var(--mono);font-size:10px}
+details.mod[open]>summary .caret{transform:rotate(90deg)}
+details.mod>summary .count{margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:400;color:var(--muted)}
+details.sub{margin:0 0 0 26px;border-left:1px solid var(--line-soft)}
+details.sub>summary{list-style:none;cursor:pointer;padding:9px 14px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+details.sub>summary::-webkit-details-marker{display:none}
+details.sub>summary:hover{color:var(--accent)}
+details.sub>summary .count{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+.case{border-top:1px solid var(--line-soft);padding:0 14px 0 18px}
+.case-h{display:flex;align-items:flex-start;gap:9px;padding:9px 0;cursor:pointer;font-size:13px;line-height:1.6}
+.case-h:hover{color:var(--accent)}
+.case-h .t{font-family:var(--mono);font-size:10px;letter-spacing:.02em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px;flex:none;margin-top:2px}
+.case-h .t.正向{color:#2F6B3F;border-color:#CFE0D4;background:#F4F9F5}
+.case-h .t.反向{color:#9A3327;border-color:#EBD3CE;background:#FCF4F2}
+.case-h .t.边界{color:#8A6414;border-color:#EBDCBC;background:#FCF8EE}
+.case-h .t.状态{color:#3F4C6B;border-color:#D4DAE7;background:#F5F7FB}
+.case-h .t.场景{color:#6B3F6B;border-color:#E2D2E2;background:#FAF5FA}
+.case-h .title{flex:1}
+.pri{font-family:var(--mono);font-size:10px;border-radius:4px;padding:1px 6px;flex:none;margin-top:2px;font-weight:600}
+.pri.P0{background:#B23A2E;color:#fff}
+.pri.P1{background:#F3E3C3;color:#7A5510}
+.pri.P2{background:#E2EFE5;color:#2F6B3F}
+.case-b{display:none;padding:2px 0 14px;font-size:12.5px;line-height:1.75;color:var(--ink-3)}
+.case.open .case-b{display:block}
+.case-b dt{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-top:8px}
+.case-b dd{margin:2px 0 0}
+.case-b .note{color:var(--muted);font-size:11.5px;border-left:2px solid var(--line);padding-left:8px;margin-top:8px}
+
+/* ---------- module index ---------- */
+.idx-table{width:100%;border-collapse:collapse;margin-top:30px;font-size:13.5px}
+.idx-table th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--muted);font-weight:500;padding:0 12px 8px 0;border-bottom:1px solid var(--line);text-transform:uppercase}
+.idx-table td{padding:8px 12px 8px 0;border-bottom:1px solid var(--line-soft);color:var(--ink-3)}
+.idx-table td:first-child{color:var(--ink)}
+.idx-table td.n,.idx-table th.n{text-align:right;font-family:var(--mono);font-size:12px;width:76px}
+.idx-table tr.total td{border-top:1px solid var(--line);border-bottom:none;font-weight:600;color:var(--ink);padding-top:12px}
+
+/* ---------- anatomy ---------- */
+.anat{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:38px;align-items:start}
+@media(max-width:900px){.anat{grid-template-columns:1fr;gap:30px}}
+.layers{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+.layers li{position:relative;padding:0 0 20px 22px}
+.layers li:before{content:'';position:absolute;left:-5px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--card);border:2px solid var(--ink)}
+.layers li:last-child{padding-bottom:0}
+.layers .lv{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+.layers .ttl{display:block;font-size:14.5px;font-weight:600;margin:2px 0 2px}
+.layers .desc{font-size:13px;color:var(--ink-3);line-height:1.7}
+.prio-cards{display:grid;gap:12px}
+.prio-card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--card);border-left-width:3px}
+.prio-card.p0{border-left-color:var(--accent)}
+.prio-card.p1{border-left-color:var(--amber)}
+.prio-card.p2{border-left-color:var(--green)}
+.prio-card b{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.prio-card p{margin:6px 0 0;font-size:13px;color:var(--ink-3);line-height:1.7}
+.prio-card .share{float:right;font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* ---------- refuses ---------- */
+.refuse{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;margin-top:34px}
+@media(max-width:820px){.refuse{grid-template-columns:1fr}}
+.refuse div{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:14px;color:var(--ink-3)}
+.refuse .x{color:var(--accent);font-family:var(--mono);font-size:13px;line-height:1.6}
+
+/* ---------- questions ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{font-size:12px;line-height:1.5;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px;color:var(--ink-3)}
+.chip b{font-family:var(--mono);font-size:10px;color:var(--accent);margin-right:6px;font-weight:600}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+
+/* ---------- install ---------- */
+.install{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+@media(max-width:900px){.install{grid-template-columns:1fr}}
+.inst{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.inst h3{margin:0 0 4px;font-size:14px;font-weight:600}
+.inst p{margin:0 0 12px;font-size:12.5px;color:var(--muted);line-height:1.6}
+.inst pre{margin:0;background:var(--code-bg);border:1px solid var(--line-soft);border-radius:7px;padding:11px 12px;font-size:11px;line-height:1.7;overflow-x:auto;color:var(--code-ink)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:44px 0 56px;background:#F7F5EF}
+.foot{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:space-between}
+.foot .who{font-size:13.5px;color:var(--ink-3);line-height:1.9}
+.foot .who b{font-weight:600;color:var(--ink)}
+.foot .links{display:flex;gap:20px;font-family:var(--mono);font-size:11.5px;color:var(--muted);flex-wrap:wrap}
+.foot .links a:hover{color:var(--accent)}
+.foot .note{width:100%;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;margin-top:8px;line-height:1.8}
+
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="mark"><svg viewBox="0 0 16 16" fill="none" stroke="#FBFAF7" stroke-width="1.6"><path d="M4 8h3M7 8V4h3M7 8v4h3"/></svg></span>
+      prd-to-xmind
+    </a>
+    <nav class="nav-links">
+      <a href="#workflow">Workflow</a>
+      <a href="#demo">Demo</a>
+      <a href="#anatomy">Output</a>
+      <a href="#install">Install</a>
+    </nav>
+    <a class="nav-cta" href="https://github.com/liyunchen/prd-to-testcases" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="dot"></span><b>Skill</b> · v1.0.0 · MIT</div>
+      <h1>Turn a PRD into a test-case mind map you can <em>actually open</em>.</h1>
+      <p class="hero-cn">把一份需求文档丢进来，拿回一份双击就能打开的 XMind 测试用例脑图。不是一段还要你手动导入的 Markdown，也不是一份看着全、实则漏了状态机的清单。</p>
+      <div class="actions">
+        <a class="btn primary" href="#demo">看一遍真实链路 ↓</a>
+        <a class="btn ghost" href="#install">安装</a>
+      </div>
+      <div class="metrics">
+        <div><b>219</b><span>Test cases</span></div>
+        <div><b>11</b><span>Branches</span></div>
+        <div><b>37</b><span>Rules covered</span></div>
+        <div><b>32%</b><span>P0 ratio</span></div>
+      </div>
+    </div>
+    <figure class="figure reveal">
+      <img src="assets/mindmap-overview.svg" alt="Mind map overview: 11 branches and 219 test cases" loading="lazy">
+      <figcaption><span>content.json → SVG</span><span>46-page PRD</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="gap">
+  <div class="wrap">
+    <div class="label"><span class="num">01</span><span class="rule"></span>The gap</div>
+    <h2>需求写得再细，用例仍然靠人拆。
+      <span class="cn">拆完还不算完：层级靠拍、优先级靠嘴、交付靠手动导入。</span>
+    </h2>
+    <p class="lead">一份 46 页的 PRD，字段表、状态机、异常分支、第 4 章的性能指标散落在不同章节。人扫一遍能记住七成，剩下的三成会在上线后变成工单。</p>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="idx">01</div>
+        <h3>拆不全</h3>
+        <p>字段表 30 个字段、4 个状态机、13 条异常分支。逐条对撞一遍要半天，漏掉的往往是「审批中客户被合并」这类中间态。</p>
+      </div>
+      <div class="card reveal">
+        <div class="idx">02</div>
+        <h3>层级靠拍</h3>
+        <p>模块、子功能、用例挤在同一层，脑图打开像一团毛线；想再往下加一层，整棵树就深到看不见。</p>
+      </div>
+      <div class="card reveal">
+        <div class="idx">03</div>
+        <h3>交付断层</h3>
+        <p>写完还是 Markdown，还要手动导入 XMind；优先级口头约定，评审时 P0 能占到七成——等于没有优先级。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="wrap">
+    <div class="label"><span class="num">02</span><span class="rule"></span>How it works</div>
+    <h2>六步，每一步都有可核对的东西。
+      <span class="cn">不是「调一次模型吐一份结果」，而是能复现、能卡住、能回滚的工序。</span>
+    </h2>
+    <div class="steps">
+      <div class="step">
+        <div class="no">01</div>
+        <div>
+          <h3>Read<span>read_prd.py</span></h3>
+          <p>PDF 用 PyMuPDF 抽文本，DOCX 走标准库，MD/TXT 直读。超过 30 页先出章节骨架，避免一上来逐页硬读。</p>
+        </div>
+        <pre class="snip"><span class="c">$</span> python scripts/read_prd.py prd.pdf --outline
+1. 需求背景
+2. 产品设计
+  2.1 创建客户   2.2 客户合作状态查询
+  2.3 客户编辑   2.4 客户跟进
+  2.6 客户合并/存档
+4. 非功能性需求</pre>
+      </div>
+      <div class="step">
+        <div class="no">02</div>
+        <div>
+          <h3>Split<span>一章一模块</span></h3>
+          <p>按章节切 L1，命名与文档用语一致，方便回溯。同时抽出全部业务规则编号、状态机与枚举、字段表，以及第 4 章的非功能指标——这一章最容易被整章漏掉。</p>
+        </div>
+        <pre class="snip"><span class="c"># 抽出来的对账清单</span>
+BR-001 … BR-011   创建客户
+BR-201 … BR-205   合作状态查询
+BR-301 … BR-305   客户编辑
+BR-401 … BR-406   客户跟进
+BR-601 … BR-610   客户合并
+状态机 2 个 · 字段表 6 张</pre>
+      </div>
+      <div class="step">
+        <div class="no">03</div>
+        <div>
+          <h3>Route<span>按文档内容选规范</span></h3>
+          <p>路由看文档里有什么，不看用户有没有提。出现 SLA / RT / 导出上限，就必须加载性能规范；出现接口路径与错误码，追加接口规范。</p>
+        </div>
+        <pre class="snip"><span class="c"># 命中条件</span>
+"≤ 2s" "≤ 30s" "10000 条"  → 性能规范
+"/api/" "错误码" "500"      → 接口规范
+默认                         → 通用设计规范</pre>
+      </div>
+      <div class="step">
+        <div class="no">04</div>
+        <div>
+          <h3>Draft<span>六策略逐条过</span></h3>
+          <p>正向、反向、边界、等价类、场景、状态迁移，每个子功能都要过一遍，不许只写正常流程。每条用例逐条判 P0/P1/P2，禁止整批默认 P1。</p>
+        </div>
+        <pre class="snip">正向 95 · 反向 51 · 状态 39
+场景 20 · 边界 14
+P0 70 (32%) · P1 125 · P2 24</pre>
+      </div>
+      <div class="step">
+        <div class="no">05</div>
+        <div>
+          <h3>Gate<span>validate_outline.py</span></h3>
+          <p>层级、标题空格、条目挂载位置、有序列表、缺步骤、缺预期、缺优先级、BR 覆盖率，八项一起卡。不过闸门就不产出文件，避免把半成品交出去。</p>
+        </div>
+        <pre class="snip"><span class="c">$</span> validate_outline.py out.md --expect-br 001-011,601-610
+业务规则覆盖 37/37 <span class="ok">✅</span>
+<span class="ok">✅ 格式校验通过，可直接生成 .xmind</span></pre>
+      </div>
+      <div class="step">
+        <div class="no">06</div>
+        <div>
+          <h3>Emit<span>build_all.py</span></h3>
+          <p>一条命令出三个文件：原生 .xmind（双击打开）、.opml（XMind 8 兜底）、.md（版本管理）。优先级自动转成 XMind 的红黄绿图标。</p>
+        </div>
+        <pre class="snip"><span class="c">$</span> python scripts/build_all.py out.md
+<span class="ok">✅</span> out.xmind   864 节点 / 219 用例
+<span class="ok">✅</span> out.opml    XMind 8 导入用
+<span class="ok">✅</span> out.md      源码</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="label"><span class="num">03</span><span class="rule"></span>Live walkthrough</div>
+    <h2>一份 46 页的 PRD，从头跑到尾。
+      <span class="cn">下面是真实输入、真实校验输出、真实产物。客户名与系统名已脱敏，业务规则原文未改。</span>
+    </h2>
+
+    <div class="demo-grid">
+      <div class="panel">
+        <div class="panel-head"><span class="file">客户中心-需求文档-摘录.md</span><span class="tag">节选 · 2.1 / 2.6 / 4</span></div>
+        <div class="panel-body prd">
+          <h4>2.1.4 创建客户表单</h4>
+          <table>
+            <tr><th>字段</th><th>控件</th><th>必填</th><th>说明</th></tr>
+            <tr><td>客户名称</td><td>Input</td><td>是</td><td>全局唯一，精确匹配</td></tr>
+            <tr><td>客户级别类型</td><td>只读文本</td><td>—</td><td>默认 LT，用户不可选</td></tr>
+            <tr><td>客户类型</td><td>Radio</td><td>是</td><td>直客 / 代理，默认直客</td></tr>
+            <tr><td>所属行业</td><td>Select</td><td>是</td><td>10 个枚举</td></tr>
+            <tr><td>城市</td><td>Select</td><td>是</td><td>国家非中国时取消必选</td></tr>
+            <tr><td>客户来源</td><td>Radio</td><td>否</td><td>非市场线索时出现「中间人」必填</td></tr>
+            <tr><td>业务类型</td><td>Select</td><td>是</td><td>按 BU 带默认值</td></tr>
+            <tr><td>推广计划</td><td>Textarea</td><td>是</td><td>无长度限制</td></tr>
+          </table>
+          <h4>2.1.6 业务规则（节选）</h4>
+          <p><span class="br">BR-001</span>客户名称全局唯一，精确匹配，除删除外全部客户</p>
+          <p><span class="br">BR-002</span>点「创建客户」先弹查重弹窗，不查询无法进入创建</p>
+          <p><span class="br">BR-004</span>客户编号自动生成 KH-{YYYYMM}{6位序号}</p>
+          <p><span class="br">BR-010</span>并发创建同名客户，后提交提示「客户已存在」</p>
+          <h4>2.6.1 下游实体处理（节选）</h4>
+          <table>
+            <tr><th>实体</th><th>合并后处理</th></tr>
+            <tr><td>客户</td><td>旧客户改已存档并记录去向，旧信息不覆盖新客户</td></tr>
+            <tr><td>报价单</td><td>归属改为新客户，已删除的不改</td></tr>
+            <tr><td>广告主</td><td>按投放平台广告主 ID 判重，仅迁移关联</td></tr>
+            <tr><td>授信额度</td><td>不直接相加，取较高者保留</td></tr>
+          </table>
+          <h4>4.1.1 响应时间</h4>
+          <p>客户列表查询 ≤ 2s（单页 50 条）· 客户合并 ≤ 3s · 跟进申请提交 ≤ 1s</p>
+        </div>
+      </div>
+
+      <div class="panel term">
+        <div class="panel-head"><span class="file">terminal</span><span class="tag">real output</span></div>
+        <pre><span class="c">$</span> python scripts/build_all.py out.md \
+    --expect-br 001-011,201-205,301-305,401-406,601-610
+
+① 校验大纲…
+根主题 1 / 模块 11 / 子功能 55 / 用例 219
+条目 578 条，明细 {'前置': 118, '步骤': 219, '预期': 219, '备注': 22}
+类型分布 {'正向': 95, '反向': 51, '边界': 14, '状态': 39, '场景': 20}
+优先级 {'P0': 70, 'P1': 125, 'P2': 24, '未标': 0}（P0 占比 <span class="hi">32.0%</span>）
+
+2.1 创建客户            5    41   15
+2.2 客户合作状态查询      4    20    5
+2.3 客户编辑            3    22    8
+2.4 客户跟进            4    30    9
+2.6 客户合并            5    36   15
+端到端业务场景           4     9    4
+非功能性需求             3    13    2
+
+业务规则覆盖 <span class="ok">37/37 ✅</span>
+
+<span class="ok">✅ 格式校验通过，可直接生成 .xmind</span>
+
+② 生成 XMind…
+<span class="ok">✅</span> out.xmind   节点 864 个 / 用例 219 条 / 50.3 KB
+<span class="ok">✅</span> out.opml    兜底文件</pre>
+      </div>
+    </div>
+
+    <div class="map-panel reveal">
+      <div class="panel-head"><span class="file">2.1 创建客户</span><span class="tag">branch · 41 cases</span></div>
+      <div class="map-body">
+        <div class="map-scroll">
+          <img src="assets/mindmap-detail.svg" alt="Mind map of branch 2.1 with 41 test cases and priority markers" loading="lazy">
+        </div>
+        <aside class="map-side">
+          <div>
+            <div class="k">This branch</div>
+            <div class="big" id="mapTotal">41<span>条用例</span></div>
+          </div>
+          <div>
+            <div class="k">Priority split</div>
+            <div class="bars" id="mapBars"></div>
+          </div>
+          <div>
+            <div class="k">Type split</div>
+            <div class="bars" id="mapTypes"></div>
+          </div>
+          <p>图中展示前两个子功能（24 条），完整 41 条可在下方用例树展开。图片由 <code>render_mindmap.py</code> 直读 <code>content.json</code> 生成，不依赖 XMind。</p>
+        </aside>
+      </div>
+      <div class="map-foot">
+        <span>图例</span>
+        <span><i class="dot" style="background:#B23A2E"></i>P0 阻塞发布</span>
+        <span><i class="dot" style="background:#C98A1B"></i>P1 影响可用</span>
+        <span><i class="dot" style="background:#3F7A4E"></i>P2 体验瑕疵</span>
+        <span style="margin-left:auto">滚动查看完整分支</span>
+      </div>
+    </div>
+
+    <div class="tree-tools">
+      <span class="small">展开两个模块的完整用例（共 77 条）</span>
+      <span class="sp"></span>
+      <button class="mini" data-tree="open">全部展开</button>
+      <button class="mini" data-tree="close">全部收起</button>
+    </div>
+    <div class="tree" id="tree"></div>
+
+    <table class="idx-table" id="idxTable"></table>
+  </div>
+</section>
+
+<section id="anatomy">
+  <div class="wrap">
+    <div class="label"><span class="num">04</span><span class="rule"></span>Output anatomy</div>
+    <h2>五层结构，三种优先级，一道闸门。
+      <span class="cn">层级只有一个真相：模块 → 子功能 → 用例 → 前置/步骤/预期。多了会乱，少了会散。</span>
+    </h2>
+    <div class="anat">
+      <ul class="layers">
+        <li>
+          <span class="lv">L0 · 中心主题</span>
+          <span class="ttl"># 项目名 + 测试用例</span>
+          <span class="desc">XMind 只认第一个一级标题，所以全文只允许一个。</span>
+        </li>
+        <li>
+          <span class="lv">L1 · 一级分支</span>
+          <span class="ttl">## 功能模块</span>
+          <span class="desc">与 PRD 章节一一对应，命名沿用文档用语，方便回溯到第几章第几节。</span>
+        </li>
+        <li>
+          <span class="lv">L2 · 二级分支</span>
+          <span class="ttl">### 子功能 / 场景组</span>
+          <span class="desc">「前置查重」「表单字段」「业务规则与异常」，一屏能看完的粒度。</span>
+        </li>
+        <li>
+          <span class="lv">L3 · 用例</span>
+          <span class="ttl">#### 类型-场景描述 [P0]</span>
+          <span class="desc">类型五选一：正向 / 反向 / 边界 / 场景 / 状态。优先级自动转成 XMind 的红黄绿图标。</span>
+        </li>
+        <li>
+          <span class="lv">L4 · 叶子</span>
+          <span class="ttl">- 前置 / 步骤 / 预期</span>
+          <span class="desc">只能挂在用例下。挂错层，XMind 里步骤就会变成用例的兄弟节点。</span>
+        </li>
+      </ul>
+      <div class="prio-cards">
+        <div class="prio-card p0">
+          <b>P0 阻塞发布</b><span class="share">70 条 · 32%</span>
+          <p>主流程走不通、额度算错、越权可访问、数据写重、状态机断链、审计缺失。命中任意一条即 P0。</p>
+        </div>
+        <div class="prio-card p1">
+          <b>P1 影响可用</b><span class="share">125 条 · 57%</span>
+          <p>异常提示缺失、边界校验失效、次要字段联动错、筛选排序不可用、性能不达标。</p>
+        </div>
+        <div class="prio-card p2">
+          <b>P2 体验瑕疵</b><span class="share">24 条 · 11%</span>
+          <p>文案、占位符、空状态、加载态、二次跳转、历史记录展示。不阻塞发布，但要登记。</p>
+        </div>
+        <p class="small" style="margin:10px 0 0">P0 占比是道闸门：低于 10% 说明核心链路没识别出来，高于 45% 说明判定过宽。正常落在 20%~35%。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="refuse">
+  <div class="wrap">
+    <div class="label"><span class="num">05</span><span class="rule"></span>What it refuses</div>
+    <h2>明确不做的事。
+      <span class="cn">这些不是风格偏好，是会直接让交付物失效的做法。</span>
+    </h2>
+    <div class="refuse">
+      <div><span class="x">✕</span><span>只交付 <code>.md</code>，让你走「文件 → 导入 → Markdown」。产出必须是原生 <code>.xmind</code>。</span></div>
+      <div><span class="x">✕</span><span>用例不标优先级，或整批默认 P1。优先级必须逐条判定。</span></div>
+      <div><span class="x">✕</span><span>用 <code>1. 2. 3.</code> 有序列表表达层级——XMind 不映射，导入后全平。</span></div>
+      <div><span class="x">✕</span><span>把 <code>-</code> 条目挂在模块或子功能下，导致步骤变成用例的兄弟节点。</span></div>
+      <div><span class="x">✕</span><span>文档没给数字却编造性能指标。缺指标就写「以产品/运维约定为准」，并登记待确认。</span></div>
+      <div><span class="x">✕</span><span>把 PRD 的矛盾自己拍板消化掉、不告诉你。歧义要单独成一支。</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="wrap">
+    <div class="label"><span class="num">06</span><span class="rule"></span>Open questions</div>
+    <h2>它还会告诉你，PRD 里哪些地方没说清。
+      <span class="cn">219 条用例背后，是 20 条需求矛盾。按最合理的假设先写，同时把洞登记下来——而不是替你拍板。</span>
+    </h2>
+    <p class="lead">下面每一条都能指到原文位置、冲突点和受影响的用例。这一支在脑图里单独成枝，评审时逐条过。</p>
+    <div class="chips" id="chips"></div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="label"><span class="num">07</span><span class="rule"></span>Install</div>
+    <h2>三种装法，选一个。
+      <span class="cn">本质都是把 <code>skills/prd-to-xmind-testcases</code> 放进你的 skills 目录。</span>
+    </h2>
+    <div class="install">
+      <div class="inst">
+        <h3>从仓库克隆</h3>
+        <p>适合要跟着改脚本的人。</p>
+        <pre>git clone https://github.com/liyunchen/prd-to-testcases.git
+cp -r prd-to-testcases/skills/prd-to-xmind-testcases \
+      ~/.workbuddy-ai/skills/</pre>
+      </div>
+      <div class="inst">
+        <h3>技能包</h3>
+        <p>下载 zip，解压到 skills 目录，含脱敏样例。</p>
+        <pre>unzip prd-to-xmind-testcases-1.0.0.zip \
+      -d ~/.workbuddy-ai/skills/</pre>
+      </div>
+      <div class="inst">
+        <h3>只跑脚本</h3>
+        <p>不想装技能，也能直接当命令行工具用。</p>
+        <pre>pip install pymupdf
+python scripts/read_prd.py prd.pdf -o prd.txt
+python scripts/build_all.py out.md</pre>
+      </div>
+    </div>
+    <p class="small" style="margin-top:22px">依赖：Python 3.9+。PDF 解析优先 PyMuPDF，缺失时回退 pypdf；DOCX 只用标准库，不装额外包。</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="who">
+        <b>李运辰</b><br>
+        <a href="https://www.chenlove.cn" target="_blank" rel="noopener">chenlove.cn</a> · MIT License
+      </div>
+      <div class="links">
+        <a href="https://github.com/liyunchen/prd-to-testcases" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="downloads/客户中心一期-测试用例.xmind" download>.xmind ↓</a>
+        <a href="downloads/客户中心一期-测试用例.md" download>.md ↓</a>
+        <a href="downloads/客户中心-需求文档-摘录.md" download>PRD 摘录 ↓</a>
+      </div>
+      <div class="note">
+        演示数据已脱敏：客户名称抽象为行业描述，内部系统名替换为通用叫法，人员姓名替换为角色，原型链接移除。业务线代号（MTC / PAC / VASC-DMC / VASC-CMC / VASC-ECP / MAAS）与全部业务规则原文保留。原始 46 页 PRD 不随仓库分发。
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var D = window.DEMO_DATA;
+  if (!D) return;
+
+  function esc(s) {
+    return String(s || '').replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  /* ---- case tree ---- */
+  var tree = document.getElementById('tree');
+  var html = '';
+  D.modules.forEach(function (m) {
+    var total = m.subs.reduce(function (a, s) { return a + s.cases.length; }, 0);
+    html += '<details class="mod" open><summary><span class="caret">▶</span>' +
+      esc(m.title) + '<span class="count">' + total + ' 条</span></summary>';
+    m.subs.forEach(function (s, si) {
+      html += '<details class="sub"' + (si === 0 ? ' open' : '') +
+        '><summary><span class="caret">▶</span>' + esc(s.title) +
+        '<span class="count">' + s.cases.length + '</span></summary>';
+      s.cases.forEach(function (c) {
+        html += '<div class="case"><div class="case-h" role="button" tabindex="0" aria-expanded="false">' +
+          '<span class="t ' + esc(c.type) + '">' + esc(c.type) + '</span>' +
+          '<span class="title">' + esc(c.title.replace(/^[^-]+-/, '')) + '</span>' +
+          '<span class="pri ' + esc(c.priority) + '">' + esc(c.priority) + '</span></div>' +
+          '<div class="case-b"><dl>' +
+          (c.pre ? '<dt>前置</dt><dd>' + esc(c.pre) + '</dd>' : '') +
+          '<dt>步骤</dt><dd>' + esc(c.steps) + '</dd>' +
+          '<dt>预期</dt><dd>' + esc(c.expect) + '</dd></dl>' +
+          (c.note ? '<div class="note">备注：' + esc(c.note) + '</div>' : '') +
+          '</div></div>';
+      });
+      html += '</details>';
+    });
+    html += '</details>';
+  });
+  tree.innerHTML = html;
+
+  function bindCases(root) {
+    root.querySelectorAll('.case-h').forEach(function (h) {
+      function toggle() {
+        var box = h.parentElement;
+        box.classList.toggle('open');
+        h.setAttribute('aria-expanded', box.classList.contains('open') ? 'true' : 'false');
+      }
+      h.addEventListener('click', toggle);
+      h.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  }
+  bindCases(tree);
+
+  document.querySelectorAll('[data-tree]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.dataset.tree === 'open';
+      tree.querySelectorAll('details').forEach(function (d) { d.open = open; });
+      tree.querySelectorAll('.case').forEach(function (c) { c.classList.toggle('open', open); });
+    });
+  });
+
+  /* ---- map side stats ---- */
+  (function () {
+    var m = D.modules[0];
+    if (!m) return;
+    var cases = [];
+    m.subs.forEach(function (s) { cases = cases.concat(s.cases); });
+    document.getElementById('mapTotal').innerHTML = cases.length + '<span>条用例</span>';
+    var pc = { P0: 0, P1: 0, P2: 0 }, tc = {};
+    cases.forEach(function (c) {
+      if (pc[c.priority] !== undefined) pc[c.priority]++;
+      tc[c.type] = (tc[c.type] || 0) + 1;
+    });
+    var pColor = { P0: '#B23A2E', P1: '#C98A1B', P2: '#3F7A4E' };
+    document.getElementById('mapBars').innerHTML = ['P0', 'P1', 'P2'].map(function (k) {
+      return '<div class="bar"><i style="background:' + pColor[k] + '"></i>' + k +
+        '<span class="n">' + pc[k] + '</span></div>';
+    }).join('');
+    document.getElementById('mapTypes').innerHTML = Object.keys(tc).map(function (k) {
+      return '<div class="bar"><i style="background:#DCD5C6"></i>' + k +
+        '<span class="n">' + tc[k] + '</span></div>';
+    }).join('');
+  })();
+
+  /* ---- module index ---- */
+  var idx = document.getElementById('idxTable');
+  var rows = '<tr><th>模块</th><th class="n">子功能</th><th class="n">用例</th></tr>';
+  var tc = 0, ts = 0;
+  D.moduleIndex.forEach(function (m) {
+    tc += m.cases; ts += m.subs;
+    rows += '<tr><td>' + esc(m.title) + '</td><td class="n">' + m.subs +
+      '</td><td class="n">' + m.cases + '</td></tr>';
+  });
+  rows += '<tr class="total"><td>合计</td><td class="n">' + ts +
+    '</td><td class="n">' + tc + '</td></tr>';
+  idx.innerHTML = rows;
+
+  /* ---- question chips ---- */
+  var chips = document.getElementById('chips');
+  chips.innerHTML = D.questions.map(function (q, i) {
+    var head = q.split('｜')[0].replace(/^Q\d+\s*/, '');
+    return '<span class="chip" title="' + esc(q) + '"><b>Q' + (i + 1) + '</b>' + esc(head) + '</span>';
+  }).join('');
+
+  /* ---- reveal ---- */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>

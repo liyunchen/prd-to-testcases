@@ -10,7 +10,7 @@ strategies, and writes a **native `.xmind` file** — not a markdown outline you
 
 - Live demo: <https://liyunchen.github.io/prd-to-testcases/>
 - Source: <https://github.com/liyunchen/prd-to-testcases>
-- Author: 李运辰 · <https://www.chenlove.cn>
+- Author: 李运辰 ·
 - License: MIT
 
 ---

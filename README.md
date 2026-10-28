@@ -150,4 +150,4 @@ python scripts/build_demo_data.py                   # docs/data.js
 
 ## License
 
-MIT © 李运辰 · <https://www.chenlove.cn>
+MIT © 李运辰 · 
